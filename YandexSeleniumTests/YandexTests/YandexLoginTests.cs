@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Threading;
+using System;
 using YandexSeleniumTests;
 
 namespace YandexTests
@@ -10,7 +10,9 @@ namespace YandexTests
     public class YandexLoginTests
     {
         [TestMethod]
-        public void LoginYandexTest()
+        [DataRow("antonantonov972", "Antongekaleo97")]
+        [DataRow("antonDD97", "Qazwsxe1133")]
+        public void LoginYandexTest(string login, string password)
         {
             IWebDriver driver = new ChromeDriver();
 
@@ -22,19 +24,23 @@ namespace YandexTests
 
             homeYandex.ClickLoginButton();
 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+
             LoginPageYandex loginPageYandex = homeYandex.GoToLoginPage();
 
-            loginPageYandex.Login("antonantonov972");
+            loginPageYandex.Login(login);
 
-            loginPageYandex.Password("Antongekaleo97");
+            loginPageYandex.Password(password);
 
-            
-            var element = driver.FindElement(By.CssSelector(".user-account__name"));
+
+            var element = driver.WaitForElement(By.CssSelector(".user-account__name"), TimeSpan.FromMinutes(2));
 
 
             Assert.IsTrue(element.Displayed, "Wrong page!");
 
             driver.Close();
+
+            
         }
     }
 }

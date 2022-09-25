@@ -9,6 +9,7 @@ namespace YandexSeleniumTests
     {
         public IWebDriver Driver { get; }
 
+        public static TimeSpan WaitMinutes = TimeSpan.FromMinutes(2);
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
