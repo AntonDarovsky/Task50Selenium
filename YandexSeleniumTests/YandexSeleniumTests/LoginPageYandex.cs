@@ -30,7 +30,7 @@ namespace YandexSeleniumTests
             
             Driver.FindElement(_signInButton1).Click();
 
-            Thread.Sleep(1000);
+            Thread.Sleep(1000);//Suspend the current thread for a given time
         }
 
         public void Password(string password)
@@ -40,7 +40,7 @@ namespace YandexSeleniumTests
 
             Driver.FindElement(_passwordButton).Click();
 
-            Thread.Sleep(5000);
+            
         }
 
         
