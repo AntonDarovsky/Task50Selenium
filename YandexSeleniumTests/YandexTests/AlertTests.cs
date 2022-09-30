@@ -1,85 +1,73 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using YandexSeleniumTests;
 using System;
-
+using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
+using YandexSeleniumTests;
 
 namespace YandexTests
 {
-    [TestClass]
+    [TestFixture]
     public class AlertTests
     {
-        [TestMethod]
+        public IWebDriver driver;
 
-        public void JavaScriptAlertBox()
+        [SetUp]
+        public void Open()
         {
-            string expectedText = "I am an alert box!";
-
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
 
             driver.Url = "https://demo.seleniumeasy.com/javascript-alert-box-demo.html";
 
             driver.Manage().Window.Maximize();
+        }
 
-            driver.WaitForElement(By.CssSelector(".btn-default"), TimeSpan.FromMinutes(3)).Click();
+        [TearDown]
+        public void Close()
+        {
+            driver.Quit();
+        }
 
-            string alertMessage = driver.SwitchTo().Alert().Text;
+        [Test]
+        public void JavaScriptAlertBoxTest()
+        {
+         string expectedText = "I am an alert box!";
+
+         driver.WaitForElement(By.CssSelector(".btn-default"), TimeSpan.FromMinutes(3)).Click();
+
+         string alertMessage = driver.SwitchTo().Alert().Text;
                         
-            Assert.AreEqual(expectedText, alertMessage);
+         Assert.AreEqual(expectedText, alertMessage, "Wrong Alert!");
 
-            driver.SwitchTo().Alert().Accept();
-                
-           driver.Close();
-
+         driver.SwitchTo().Alert().Accept();
         }
 
-        [TestMethod]
-
-        public void JavaScriptConfirmBox1()
+        [Test]
+        public void JavaScriptConfirmBoxTest1()
         {
             string expectedText = "Press a button!";
-
-            IWebDriver driver = new ChromeDriver();
-
-            driver.Url = "https://demo.seleniumeasy.com/javascript-alert-box-demo.html";
-
-            driver.Manage().Window.Maximize();
 
             driver.WaitForElement(By.CssSelector(".btn-lg"), TimeSpan.FromMinutes(3)).Click();
 
             string alertMessage = driver.SwitchTo().Alert().Text;
 
-            Assert.AreEqual(expectedText, alertMessage);
+            Assert.AreEqual(expectedText, alertMessage, "Wrong Alert!");
 
             driver.SwitchTo().Alert().Accept();
-
-            driver.Close();
-
         }
 
-        [TestMethod]
-
-        public void JavaScriptConfirmBox2()
+        [Test]
+        public void JavaScriptConfirmBoxTest2()
         {
             string expectedText = "Press a button!";
-
-            IWebDriver driver = new ChromeDriver();
-
-            driver.Url = "https://demo.seleniumeasy.com/javascript-alert-box-demo.html";
-
-            driver.Manage().Window.Maximize();
 
             driver.WaitForElement(By.CssSelector(".btn-lg"), TimeSpan.FromMinutes(3)).Click();
 
             string alertMessage = driver.SwitchTo().Alert().Text;
 
-            Assert.AreEqual(expectedText, alertMessage);
+            Assert.AreEqual(expectedText, alertMessage, "Wrong Alert!");
 
             driver.SwitchTo().Alert().Dismiss();
-
-            driver.Close();
-
         }
     }
 }

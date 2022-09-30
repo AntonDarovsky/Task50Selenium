@@ -13,10 +13,9 @@ namespace YandexTests
     [TestClass]
     public class TableTest
     {
-        static readonly IWebDriver driver = new ChromeDriver();
+        readonly IWebDriver driver = new ChromeDriver();
     
         [TestMethod]
-
         public void TableListOfUsers()
         {
             driver.Url = "https://demo.seleniumeasy.com/table-sort-search-demo.html";

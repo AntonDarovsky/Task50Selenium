@@ -11,8 +11,8 @@ namespace YandexSeleniumTests
     {
         public TablePage(IWebDriver driver): base(driver)
         {
-
         }
+
         public List<List<string>> GetTableRows(List<List<string>> container)
         {
             var table = Driver.FindElement(By.XPath("//*[@id='example']"));

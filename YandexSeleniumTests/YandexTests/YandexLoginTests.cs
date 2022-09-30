@@ -38,9 +38,7 @@ namespace YandexTests
 
             Assert.IsTrue(element.Displayed, "Wrong page!");
 
-            driver.Close();
-
-            
+            driver.Quit();    
         }
     }
 }

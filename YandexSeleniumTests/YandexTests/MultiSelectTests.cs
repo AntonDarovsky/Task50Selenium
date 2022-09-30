@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-
+using System;
 
 namespace YandexTests
 {
@@ -10,7 +10,6 @@ namespace YandexTests
     public class MultiSelectTests
     {
         [TestMethod]
-
         public void MultiSelectTest1()
         {
             string[] states = { "California", "Florida", "New York" };
@@ -30,10 +29,11 @@ namespace YandexTests
                 select.SelectByValue(state);
             }
 
+            Assert.AreEqual(select.AllSelectedOptions.Count, 3);
+
             select.DeselectAll();
 
-            driver.Close();
- 
+            driver.Quit();
         }
     }
 }

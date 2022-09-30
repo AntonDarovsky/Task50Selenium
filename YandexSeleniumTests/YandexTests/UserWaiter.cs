@@ -11,7 +11,6 @@ namespace YandexTests
     public class UserWaiter
     {
         [TestMethod]
-
         public void WaitUser()
         {
             IWebDriver driver = new ChromeDriver();
@@ -26,7 +25,7 @@ namespace YandexTests
 
             Assert.IsTrue(element.Displayed, "element is not loading");
 
-            driver.Close();
+            driver.Quit();
         }
     }
 }

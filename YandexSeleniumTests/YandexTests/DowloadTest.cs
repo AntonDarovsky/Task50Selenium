@@ -10,10 +10,8 @@ namespace YandexTests
     [TestClass]
     public class DowloadTest
     {
-
         [TestMethod]
-
-        public void RefreshPage()
+        public void RefreshPageTest()
         {
             IWebDriver driver = new ChromeDriver();
 
@@ -27,12 +25,13 @@ namespace YandexTests
 
             var persentage = driver.FindElement(By.CssSelector(".percenttext"));
 
+            Assert.IsTrue(persentage.Displayed, "element is not presented");
+
             var element = wait.Until(driver => persentage.Text.Contains("50%"));
 
             driver.Navigate().Refresh();
 
-            driver.Close();
-
+            driver.Quit();
         }
     }
 }
